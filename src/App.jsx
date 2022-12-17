@@ -1,5 +1,6 @@
 import "./App.css";
 import React from "react";
+import FilmsList from "./components/filmsList";
 
 class App extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class App extends React.Component {
     this.setState({ list: newList, text: "" });
   }
 
-  resetList(){
+  resetList() {
     this.setState({
       list: ["ready", "set", "GO"],
       text: "",
@@ -30,22 +31,25 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Hello World</h1>
-        <form onSubmit={this.onSubmit}>
-          <input
-            type="text"
-            value={this.state.text}
-            onChange={(event) => this.setState({ text: event.target.value })}
-          />
-          <button type="submit">Add</button>
-        </form>
-        <ul>
-          {this.state.list.map((item, idx) => {
-            return <li key={item + idx}>{item}</li>;
-          })}
-          <button onClick={this.resetList}>reset</button>
-        </ul>
+      <div className="App">
+        <div className="App-header">
+          <h1>Hello World</h1>
+          <form onSubmit={this.onSubmit}>
+            <input
+              type="text"
+              value={this.state.text}
+              onChange={(event) => this.setState({ text: event.target.value })}
+            />
+            <button type="submit">Add</button>
+          </form>
+          <ul>
+            {this.state.list.map((item, idx) => {
+              return <li key={item + idx}>{item}</li>;
+            })}
+            <button onClick={this.resetList}>reset</button>
+          </ul>
+          <FilmsList />
+        </div>
       </div>
     );
   }

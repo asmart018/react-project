@@ -1,58 +1,45 @@
 import "./App.css";
-import React from "react";
+import { useState } from "react";
 import FilmsList from "./components/filmsList";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+function App(props) {
+  let [list, setList] = useState(["ready", "set", "GO"]);
+  let [text, setText] = useState("");
 
-    this.state = {
-      list: ["ready", "set", "GO"],
-      text: "",
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-    this.resetList = this.resetList.bind(this);
-  }
-
-  onSubmit(event) {
+  function onSubmit(event) {
     event.preventDefault();
 
-    let newList = [...this.state.list, this.state.text];
-    this.setState({ list: newList, text: "" });
+    let newList = [...list, text];
+    setList(newList);
+    setText("");
   }
 
-  resetList() {
-    this.setState({
-      list: ["ready", "set", "GO"],
-      text: "",
-    });
+  function resetList() {
+    setList(["ready", "set", "GO"]);
+    setText("");
   }
 
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <h1>Hello World</h1>
-          <form onSubmit={this.onSubmit}>
-            <input
-              type="text"
-              value={this.state.text}
-              onChange={(event) => this.setState({ text: event.target.value })}
-            />
-            <button type="submit">Add</button>
-          </form>
-          <ul>
-            {this.state.list.map((item, idx) => {
-              return <li key={item + idx}>{item}</li>;
-            })}
-            <button onClick={this.resetList}>reset</button>
-          </ul>
-          <FilmsList />
-        </div>
+  return (
+    <div className="App">
+      <div className="App-header">
+        <h1>Hello World</h1>
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            value={text}
+            onChange={(event) => setText(event.target.value)}
+          />
+          <button type="submit">Add</button>
+        </form>
+        <ul>
+          {list.map((item, idx) => {
+            return <li key={item + idx}>{item}</li>;
+          })}
+          <button onClick={resetList}>reset</button>
+        </ul>
+        <FilmsList />
       </div>
-    );
-  }
+    </div>
+  );
 }
-
 export default App;

@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.select {
+  margin: 0px 15px;
+  vertical-align: middle;
+}
+
+:root {background-color: #61dafb;}

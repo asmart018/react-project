@@ -1,7 +1,7 @@
 import "../../src/App.css";
 import { useState } from "react";
 
-function HomePage() {
+function HomePage(props) {
   let [list, setList] = useState(["ready", "set", "GO"]);
   let [text, setText] = useState("");
 
